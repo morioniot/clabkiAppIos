@@ -11,7 +11,7 @@ import Foundation
 struct Device {
     
     // UUIDs
-    static let clabki_service_uuid = "CABF"
+    static let clabki_service_uuid = "CABB"
     
     // Restore and Preservation
     static let centralRestoreIdentifier = "clabkiCentralManager"

@@ -10,6 +10,8 @@ import UIKit
 import CoreLocation
 import CoreBluetooth
 import UserNotifications
+import Alamofire
+
 
 
 @UIApplicationMain
@@ -72,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
     
+    
     //** CORELOCATION METHOD DELEGATE **/////
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("*** DID UPDATE LOCATIONS EVENTS ***")
@@ -93,10 +96,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print(" *** Peripheral Discovered ***")
-        print(peripheral)
-        print(advertisementData)
+        print("Did Discover a Peripheral")
         presentLocalNotification(message: "Una mascota Clabki está cerca de ti")
+        let request = HttpRequestMaker()
+        request.getPetStatus(major: "1", minor: "4"){
+            (response) in print(response!)
+        }
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
