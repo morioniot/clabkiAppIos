@@ -10,23 +10,23 @@ import UIKit
 import CoreLocation
 import CoreBluetooth
 import UserNotifications
-import Alamofire
-
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate, CBCentralManagerDelegate {
     
     var window: UIWindow?
+    let notification = LocalNotification()
     let locationManager = CLLocationManager()
     var centralManager: CBCentralManager!
     
+    
+    //MARK: CENTRAL MANAJER LAUNCHER AND PERMISSION VERIFICATION
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
         configureCentralManagerObject();
         if(launchOptions == nil){
             if #available(iOS 10.0, *) {
-                configureNotifications()
+                notification.configureNotifications()
             }
             
             // Checking authorization CORE LOCATION permissions status
@@ -42,54 +42,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionRestoreIdentifierKey : Device.centralRestoreIdentifier])
     }
     
-    func configureNotifications(){
-        let center = UNUserNotificationCenter.current()
-        center.delegate = self as? UNUserNotificationCenterDelegate
-        center.requestAuthorization(options: [.alert, .sound]) { (success, error) in
-            if let error = error {
-                print("Request Authorization Failed (\(error), \(error.localizedDescription))")
-            }
-        }
-    }
+
     
-    func presentLocalNotification(message: String){
-        let date = Date();
-        if #available(iOS 10.0, *) {
-            let notificationContent = UNMutableNotificationContent()
-            notificationContent.title = "CLABKI"
-            notificationContent.subtitle = String(describing: date)
-            notificationContent.body = message
-            notificationContent.sound = UNNotificationSound.default()
-            //Add Trigger
-            let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval:0.01, repeats:false)
-            
-            //Create Notification Request
-            let notificationRequest = UNNotificationRequest(identifier:"peripheral_found_notification", content: notificationContent, trigger: notificationTrigger)
-            
-            UNUserNotificationCenter.current().add(notificationRequest) { (error) in
-                if let error = error {
-                    print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-                }
-            }
-        }
-    }
-    
-    
-    //** CORELOCATION METHOD DELEGATE **/////
+    //MARK: CORELOCATION METHODS DELEGATE
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("*** DID UPDATE LOCATIONS EVENTS ***")
-        //presentLocalNotification(message: "DID UPDATE LOCATIONS")
-        //print(locations)
+        notification.presentLocalNotification(message: "DID UPDATE LOCATIONS")
     }
-    //**********************************/////
-    
-    //** COREBLUETOOTH METHODS DELEGATE **/////
+
+    //MARK: COREBLUETOOTH METHODS DELEGATE
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        //MARK: CHECKING BLUETOOTH ADAPTER STATUS
         if(central.state != .poweredOn){
-            presentLocalNotification(message: "Enciende tu bluetooth para empezar a ayudar a mascotas perdidas a encontrar su hogar :)")
+            notification.presentLocalNotification(message: "Enciende tu bluetooth para ayudar a mascotas perdidas a encontrar su hogar :)")
         }
         else{
-            ///// INICIARÌA AUTOMÀTICAMENTE EL SCANEO DE DISPOSITIVOS
             locationManager.startMonitoringSignificantLocationChanges()
             centralManager.scanForPeripherals(withServices: [CBUUID.init(string: Device.clabki_service_uuid)], options: nil )
         }
@@ -97,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("Did Discover a Peripheral")
-        presentLocalNotification(message: "Una mascota Clabki está cerca de ti")
+        notification.presentLocalNotification(message: "Una mascota Clabki está cerca de ti")
         let request = HttpRequestMaker()
         request.getPetStatus(major: "1", minor: "4"){
             (response) in print(response!)
@@ -105,8 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        print("Will Restore State Method :o :o :o :o")
-        presentLocalNotification(message: "Will Restore State Method :o :o :o :o")
+        notification.presentLocalNotification(message: "Will Restore State Method :o :o :o :o")
     }
     //** ****************************** //////
     
@@ -135,12 +101,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
 }
 
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Swift.Void) {
-        
-        completionHandler([.alert, .sound])
-    }
-    
-}
+
+
 

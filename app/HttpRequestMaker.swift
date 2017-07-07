@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class HttpRequestMaker{
 
@@ -17,8 +18,8 @@ class HttpRequestMaker{
             .responseJSON { response in
                 
                 guard response.result.isSuccess else {
-                    print("Error while fetching tags: \(String(describing: response.result.error))")
-                    completeOnClosure(response.result.error as AnyObject)
+                    let responseError: JSON = ["Error":(String(describing: response.result.error))]
+                    completeOnClosure(responseError as AnyObject)
                     return
                 }
                 
