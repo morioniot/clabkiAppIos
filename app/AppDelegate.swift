@@ -11,6 +11,7 @@ import CoreLocation
 import CoreBluetooth
 import UserNotifications
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate, CBCentralManagerDelegate {
     
@@ -65,9 +66,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("Did Discover a Peripheral")
         notification.presentLocalNotification(message: "Una mascota Clabki está cerca de ti")
+        let beaconData = BeaconDataExtractor()
+        let peripheralAttributes = beaconData.getData(advertisementData: advertisementData)
         let request = HttpRequestMaker()
-        request.getPetStatus(major: "1", minor: "4"){
-            (response) in print(response!)
+        request.getPetStatus(requestParameters: peripheralAttributes){
+            (response) in
+                print("Peripheral Founded Status:")
+                print(response!)
         }
     }
     

@@ -12,8 +12,8 @@ import SwiftyJSON
 
 class HttpRequestMaker{
 
-    func getPetStatus(major: String, minor: String, completeOnClosure:@escaping (AnyObject?) -> ()) {
-        let parameters: Parameters = ["major":major, "minor": minor]
+    func getPetStatus( requestParameters: Dictionary<String, UInt16>, completeOnClosure:@escaping (AnyObject?) -> ()) {
+        let parameters: Parameters = requestParameters
         Alamofire.request("http://clabkiapi-morion.rhcloud.com/api/getStatus",parameters: parameters)
             .responseJSON { response in
                 

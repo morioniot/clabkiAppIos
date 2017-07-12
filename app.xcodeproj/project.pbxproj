@@ -11,6 +11,7 @@
 		0BF703A09FB280D3412BC829 /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C16DFD50054AE5BAD85DD131 /* Pods_app.framework */; };
 		374FE7ED1F0FDD0C0013B322 /* LocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE7EC1F0FDD0C0013B322 /* LocalNotifications.swift */; };
 		37BAE77F1F0ECC7900298377 /* HttpRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAE77E1F0ECC7900298377 /* HttpRequestMaker.swift */; };
+		37D5A2391F157F7A00E6CBA1 /* BeaconDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D5A2381F157F7A00E6CBA1 /* BeaconDataExtractor.swift */; };
 		37DE31B51F0D985E00A78C83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE31B41F0D985E00A78C83 /* AppDelegate.swift */; };
 		37DE31B71F0D985E00A78C83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE31B61F0D985E00A78C83 /* ViewController.swift */; };
 		37DE31BA1F0D985E00A78C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DE31B81F0D985E00A78C83 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		29096860979D756B1169AE5E /* Pods-appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-appTests/Pods-appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		374FE7EC1F0FDD0C0013B322 /* LocalNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotifications.swift; sourceTree = "<group>"; };
 		37BAE77E1F0ECC7900298377 /* HttpRequestMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequestMaker.swift; sourceTree = "<group>"; };
+		37D5A2381F157F7A00E6CBA1 /* BeaconDataExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconDataExtractor.swift; sourceTree = "<group>"; };
 		37DE31B11F0D985E00A78C83 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DE31B41F0D985E00A78C83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37DE31B61F0D985E00A78C83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				37DE31E21F0D989500A78C83 /* Device.swift */,
 				37BAE77E1F0ECC7900298377 /* HttpRequestMaker.swift */,
 				374FE7EC1F0FDD0C0013B322 /* LocalNotifications.swift */,
+				37D5A2381F157F7A00E6CBA1 /* BeaconDataExtractor.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D5A2391F157F7A00E6CBA1 /* BeaconDataExtractor.swift in Sources */,
 				37DE31B71F0D985E00A78C83 /* ViewController.swift in Sources */,
 				37DE31E31F0D989500A78C83 /* Device.swift in Sources */,
 				37BAE77F1F0ECC7900298377 /* HttpRequestMaker.swift in Sources */,
