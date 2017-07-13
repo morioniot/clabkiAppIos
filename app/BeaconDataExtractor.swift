@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreBluetooth
-import SwiftyJSON
 
 class BeaconDataExtractor{
 

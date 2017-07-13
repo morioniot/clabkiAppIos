@@ -72,7 +72,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         request.getPetStatus(requestParameters: peripheralAttributes){
             (response) in
                 print("Peripheral Founded Status:")
-                print(response!)
+                print(response)
+                let jsonResponse: [String:Any] = response
+                let petStatus = jsonResponse["reported_as_lost"]! as! Bool
+                if(petStatus){
+                    print("PET IS REPORTED AS LOST :(")
+                }
+                else{
+                    print("PET IS NOT REPORTED AS LOST")
+                }
         }
     }
     

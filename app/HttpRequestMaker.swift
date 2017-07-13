@@ -8,28 +8,28 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 class HttpRequestMaker{
 
-    func getPetStatus( requestParameters: Dictionary<String, UInt16>, completeOnClosure:@escaping (AnyObject?) -> ()) {
+    func getPetStatus( requestParameters: Dictionary<String, UInt16>, completeOnClosure:@escaping ([String:Any]) -> ()) {
         let parameters: Parameters = requestParameters
         Alamofire.request("http://clabkiapi-morion.rhcloud.com/api/getStatus",parameters: parameters)
             .responseJSON { response in
                 
                 guard response.result.isSuccess else {
-                    let responseError: JSON = ["Error":(String(describing: response.result.error))]
-                    completeOnClosure(responseError as AnyObject)
+                    let responseError: [String:Any] = ["Error":(String(describing: response.result.error))]
+                    completeOnClosure(responseError)
                     return
                 }
                 
                 guard let responseJSON = response.result.value as? [String: Any] else {
                     let message = "Invalid tag information received from the service"
-                    completeOnClosure(message as AnyObject)
+                    let responseError: [String:Any] = ["Error":message]
+                    completeOnClosure(responseError)
                     return
                 }
                 
-                completeOnClosure(responseJSON as AnyObject)
+                completeOnClosure(responseJSON)
                 
         }
     }
