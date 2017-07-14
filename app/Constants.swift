@@ -20,7 +20,7 @@ struct Device {
 
 struct RequestUrls{
 
-    static let getPetStatus   = "http://clabkiapi-morion.rhcloud.com/api/getStatus"
+    static let  getPetInfo   = "http://clabkiapi-morion.rhcloud.com/api/getStatus"
     static let  addPetLocation = "http://clabkiapi-morion.rhcloud.com/api/addLocationToPet"
     
 }

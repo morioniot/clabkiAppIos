@@ -66,22 +66,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("Did Discover a Peripheral")
         notification.presentLocalNotification(message: "Una mascota Clabki está cerca de ti")
-        let beaconData = BeaconDataExtractor()
-        let peripheralAttributes = beaconData.getData(advertisementData: advertisementData)
-        let request = HttpRequestMaker()
-        request.makeRequest(requestParameters: peripheralAttributes, url: RequestUrls.getPetStatus){
+        let beacon = BeaconDataExtractor()
+        let beaconAttributes = beacon.getData(advertisementData: advertisementData)
+        let pet = Pet()
+        pet.requestInfo(beaconAttributes: beaconAttributes){
             (response) in
-                print("Peripheral Founded Status:")
-                print(response)
-                let petStatus = response["reported_as_lost"]! as! Bool
-                if(petStatus){
-                    print("PET IS REPORTED AS LOST :(")
-                    let latitude = self.locationManager.location?.coordinate.latitude
-                    let longitud = self.locationManager.location?.coordinate.longitude
-                    print(latitude!)
-                    print(longitud!)
-                }
+            print(response)
+            print(pet.major)
+            print(pet.reported_as_lost)
         }
+
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
