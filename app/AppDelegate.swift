@@ -69,17 +69,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let beaconData = BeaconDataExtractor()
         let peripheralAttributes = beaconData.getData(advertisementData: advertisementData)
         let request = HttpRequestMaker()
-        request.getPetStatus(requestParameters: peripheralAttributes){
+        request.makeRequest(requestParameters: peripheralAttributes, url: RequestUrls.getPetStatus){
             (response) in
                 print("Peripheral Founded Status:")
                 print(response)
-                let jsonResponse: [String:Any] = response
-                let petStatus = jsonResponse["reported_as_lost"]! as! Bool
+                let petStatus = response["reported_as_lost"]! as! Bool
                 if(petStatus){
                     print("PET IS REPORTED AS LOST :(")
-                }
-                else{
-                    print("PET IS NOT REPORTED AS LOST")
+                    let latitude = self.locationManager.location?.coordinate.latitude
+                    let longitud = self.locationManager.location?.coordinate.longitude
+                    print(latitude!)
+                    print(longitud!)
                 }
         }
     }

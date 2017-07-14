@@ -19,7 +19,7 @@
 		37DE31BF1F0D985E00A78C83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DE31BD1F0D985E00A78C83 /* LaunchScreen.storyboard */; };
 		37DE31CA1F0D985E00A78C83 /* appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE31C91F0D985E00A78C83 /* appTests.swift */; };
 		37DE31D51F0D985F00A78C83 /* appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE31D41F0D985F00A78C83 /* appUITests.swift */; };
-		37DE31E31F0D989500A78C83 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE31E21F0D989500A78C83 /* Device.swift */; };
+		37DE31E31F0D989500A78C83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE31E21F0D989500A78C83 /* Constants.swift */; };
 		37DE31E71F0D99F400A78C83 /* happy_ending.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DE31E51F0D99F400A78C83 /* happy_ending.png */; };
 		37DE31E81F0D99F400A78C83 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DE31E61F0D99F400A78C83 /* logo.png */; };
 		B1F0D56BF40E1F19DB00B05A /* Pods_appUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60BFFC8433298AADDC89E0B5 /* Pods_appUITests.framework */; };
@@ -61,7 +61,7 @@
 		37DE31D01F0D985F00A78C83 /* appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = appUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DE31D41F0D985F00A78C83 /* appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appUITests.swift; sourceTree = "<group>"; };
 		37DE31D61F0D985F00A78C83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		37DE31E21F0D989500A78C83 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		37DE31E21F0D989500A78C83 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		37DE31E51F0D99F400A78C83 /* happy_ending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = happy_ending.png; sourceTree = "<group>"; };
 		37DE31E61F0D99F400A78C83 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		38A1B829B7F1E3979C418805 /* Pods-appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-appTests/Pods-appTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 				37DE31BB1F0D985E00A78C83 /* Assets.xcassets */,
 				37DE31BD1F0D985E00A78C83 /* LaunchScreen.storyboard */,
 				37DE31C01F0D985E00A78C83 /* Info.plist */,
-				37DE31E21F0D989500A78C83 /* Device.swift */,
+				37DE31E21F0D989500A78C83 /* Constants.swift */,
 				37BAE77E1F0ECC7900298377 /* HttpRequestMaker.swift */,
 				374FE7EC1F0FDD0C0013B322 /* LocalNotifications.swift */,
 				37D5A2381F157F7A00E6CBA1 /* BeaconDataExtractor.swift */,
@@ -477,7 +477,7 @@
 			files = (
 				37D5A2391F157F7A00E6CBA1 /* BeaconDataExtractor.swift in Sources */,
 				37DE31B71F0D985E00A78C83 /* ViewController.swift in Sources */,
-				37DE31E31F0D989500A78C83 /* Device.swift in Sources */,
+				37DE31E31F0D989500A78C83 /* Constants.swift in Sources */,
 				37BAE77F1F0ECC7900298377 /* HttpRequestMaker.swift in Sources */,
 				374FE7ED1F0FDD0C0013B322 /* LocalNotifications.swift in Sources */,
 				37DE31B51F0D985E00A78C83 /* AppDelegate.swift in Sources */,

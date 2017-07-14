@@ -17,3 +17,10 @@ struct Device {
     static let centralRestoreIdentifier = "clabkiCentralManager"
     
 }
+
+struct RequestUrls{
+
+    static let getPetStatus   = "http://clabkiapi-morion.rhcloud.com/api/getStatus"
+    static let  addPetLocation = "http://clabkiapi-morion.rhcloud.com/api/addLocationToPet"
+    
+}
