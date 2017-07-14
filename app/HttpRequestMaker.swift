@@ -11,7 +11,7 @@ import Alamofire
 
 class HttpRequestMaker{
 
-    func makeRequest( requestParameters: Dictionary<String, UInt16>, url: String, completeOnClosure:@escaping ([String:Any]) -> ()) {
+    func makeRequest( requestParameters: Dictionary<String, Any>, url: String, completeOnClosure:@escaping ([String:Any]) -> ()) {
         let parameters: Parameters = requestParameters
         Alamofire.request(url,parameters: parameters)
             .responseJSON { response in

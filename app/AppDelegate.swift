@@ -71,11 +71,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let pet = Pet()
         pet.requestInfo(beaconAttributes: beaconAttributes){
             (response) in
-            print(response)
-            print(pet.major)
-            print(pet.reported_as_lost)
+            if(pet.reported_as_lost){
+                let latitude  = self.locationManager.location?.coordinate.latitude
+                let longitude = self.locationManager.location?.coordinate.longitude
+                pet.addLocation(latitude: latitude!, longitude: longitude!){
+                    (response) in
+                        print(response)
+                }
+            }
         }
-
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
