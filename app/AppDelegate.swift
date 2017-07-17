@@ -20,19 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     let locationManager = CLLocationManager()
     var centralManager: CBCentralManager!
     
-    
-    //MARK: CENTRAL MANAJER LAUNCHER AND PERMISSION VERIFICATION
+    //MARK: CENTRAL MANAJER LAUNCHER AND PERMISSIONS VERIFICATION
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        //MARK: Checking authorization CORE LOCATION permissions status
+        if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedAlways) {
+            locationManager.requestAlwaysAuthorization()
+        }
         configureCentralManagerObject();
         if(launchOptions == nil){
             if #available(iOS 10.0, *) {
                 notification.configureNotifications()
-            }
-            
-            // Checking authorization CORE LOCATION permissions status
-            if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedAlways) {
-                locationManager.requestAlwaysAuthorization();
             }
         }
         return true
@@ -42,8 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         self.locationManager.delegate = self
         centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionRestoreIdentifierKey : Device.centralRestoreIdentifier])
     }
-    
-
     
     //MARK: CORELOCATION METHODS DELEGATE
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -59,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         else{
             locationManager.startMonitoringSignificantLocationChanges()
-            centralManager.scanForPeripherals(withServices: [CBUUID.init(string: Device.clabki_service_uuid)], options: nil )
+            centralManager.scanForPeripherals(withServices: [CBUUID.init(string: Device.clabki_service_uuid)], options: nil)
         }
     }
     
@@ -72,11 +68,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         pet.requestInfo(beaconAttributes: beaconAttributes){
             (response) in
             if(pet.reported_as_lost){
-                let latitude  = self.locationManager.location?.coordinate.latitude
-                let longitude = self.locationManager.location?.coordinate.longitude
-                pet.addLocation(latitude: latitude!, longitude: longitude!){
-                    (response) in
-                        print(response)
+                if(CLLocationManager.locationServicesEnabled()){
+                    let latitude  = self.locationManager.location?.coordinate.latitude
+                    let longitude = self.locationManager.location?.coordinate.longitude
+                    if(latitude != nil && longitude != nil){
+                        pet.addLocation(latitude: latitude!, longitude: longitude!){
+                            (response) in
+                                print(response)
+                        }
+                    }
+
                 }
             }
         }
