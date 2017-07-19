@@ -46,6 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         print("*** DID UPDATE LOCATIONS EVENTS ***")
         notification.presentLocalNotification(message: "DID UPDATE LOCATIONS")
     }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("Cambio en el status de los permisos")
+        print(status)
+        if(status != .authorizedAlways){
+            notification.presentLocalNotification(message: "Por favor habilita el servicio de localización para que Clabki pueda seguir ayudando a mascotas perdidas")
+        }
+    }
 
     //MARK: COREBLUETOOTH METHODS DELEGATE
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -77,9 +85,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                                 print(response)
                         }
                     }
-
                 }
             }
+            //** MARK: RESSETING SCANNING EVERY TIME FIND A PERIPHERAL
+            //self.resetScannig()
         }
     }
     
@@ -87,6 +96,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         notification.presentLocalNotification(message: "Will Restore State Method :o :o :o :o")
     }
     //** ****************************** //////
+    
+    func resetScannig(){
+        centralManager.stopScan()
+        centralManager.scanForPeripherals(withServices: [CBUUID.init(string: Device.clabki_service_uuid)], options: nil)
+    }
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
