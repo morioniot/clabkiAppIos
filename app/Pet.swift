@@ -23,9 +23,11 @@ class Pet{
         let request = HttpRequestMaker()
         request.makeRequest(requestParameters: parameters, url: RequestUrls.getPetInfo){
             (response) in
-                self.major = response["major"] as! UInt16
-                self.minor = response["minor"] as! UInt16
-                self.reported_as_lost = response["reported_as_lost"] as! Bool
+                if(response["error"] == nil){
+                    self.major = response["major"] as! UInt16
+                    self.minor = response["minor"] as! UInt16
+                    self.reported_as_lost = response["reported_as_lost"] as! Bool
+                }
                 completeOnClosure(response)
                 return 
         }
